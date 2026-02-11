@@ -1,4 +1,4 @@
-{
+﻿{
     "replace":  false,
     "values":  [
                    "#c:rods/compressed_iron",
@@ -10,7 +10,6 @@
                    "#c:rods/antimony",
                    "#c:rods/tungsten",
                    "#c:rods/solder",
-                   "#c:rods/thorium",
                    "#c:rods/tungsten_steel"
                ]
 }

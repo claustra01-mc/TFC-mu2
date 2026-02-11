@@ -1,4 +1,4 @@
-{
+﻿{
   "values": [
     "#c:ingots/compressed_iron",
     "#c:ingots/platinum",
@@ -9,8 +9,8 @@
     "#c:ingots/antimony",
     "#c:ingots/tungsten",
     "#c:ingots/solder",
-    "#c:ingots/thorium",
     "#c:ingots/tungsten_steel",
     "#c:ingots/high_carbon_tungsten_steel"
   ]
 }
+

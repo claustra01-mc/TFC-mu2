@@ -1,4 +1,4 @@
-{
+﻿{
     "replace":  false,
     "values":  [
                    "#c:metal/pellet/compressed_iron",
@@ -10,7 +10,6 @@
                    "#c:metal/pellet/antimony",
                    "#c:metal/pellet/tungsten",
                    "#c:metal/pellet/solder",
-                   "#c:metal/pellet/thorium",
                    "#c:metal/pellet/tungsten_steel"
                ]
 }

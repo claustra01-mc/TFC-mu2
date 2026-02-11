@@ -1,4 +1,4 @@
-{
+﻿{
     "replace":  false,
     "values":  [
                    "#c:rivets/compressed_iron",
@@ -10,7 +10,6 @@
                    "#c:rivets/antimony",
                    "#c:rivets/tungsten",
                    "#c:rivets/solder",
-                   "#c:rivets/thorium",
                    "#c:rivets/tungsten_steel"
                ]
 }

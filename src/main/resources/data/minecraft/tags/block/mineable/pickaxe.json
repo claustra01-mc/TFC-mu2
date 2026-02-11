@@ -1,4 +1,4 @@
-{
+﻿{
     "values":  [
                    "tfcmu2:metal/block/compressed_iron",
                    "tfcmu2:metal/block/platinum",
@@ -9,7 +9,6 @@
                    "tfcmu2:metal/block/antimony",
                    "tfcmu2:metal/block/tungsten",
                    "tfcmu2:metal/block/solder",
-                   "tfcmu2:metal/block/thorium",
                    "tfcmu2:metal/block/tungsten_steel",
                    "tfcmu2:ore/poor_native_osmium/granite",
                    "tfcmu2:ore/poor_native_osmium/diorite",

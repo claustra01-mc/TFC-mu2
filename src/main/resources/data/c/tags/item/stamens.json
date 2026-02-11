@@ -1,4 +1,4 @@
-{
+﻿{
     "replace":  false,
     "values":  [
                    "#c:stamens/compressed_iron",
@@ -10,7 +10,6 @@
                    "#c:stamens/antimony",
                    "#c:stamens/tungsten",
                    "#c:stamens/solder",
-                   "#c:stamens/thorium",
                    "#c:stamens/tungsten_steel"
                ]
 }

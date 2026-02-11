@@ -20,7 +20,6 @@ public enum Tfcmu2Metal implements RegistryMetal {
     ANTIMONY("antimony", Rarity.COMMON),
     TUNGSTEN("tungsten", Rarity.EPIC),
     SOLDER("solder", Rarity.UNCOMMON),
-    THORIUM("thorium", Rarity.EPIC),
     TUNGSTEN_STEEL("tungsten_steel", Rarity.EPIC);
 
     private final String serializedName;

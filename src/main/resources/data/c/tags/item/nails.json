@@ -1,4 +1,4 @@
-{
+﻿{
     "replace":  false,
     "values":  [
                    "#c:nails/compressed_iron",
@@ -10,7 +10,6 @@
                    "#c:nails/antimony",
                    "#c:nails/tungsten",
                    "#c:nails/solder",
-                   "#c:nails/thorium",
                    "#c:nails/tungsten_steel"
                ]
 }
