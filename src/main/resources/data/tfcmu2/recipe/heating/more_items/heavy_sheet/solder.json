@@ -10,7 +10,7 @@
                        "tag":  "c:heavy_sheets/solder"
                    },
     "result_fluid":  {
-                         "amount":  400,
+                         "amount":  600,
                          "id":  "tfc:metal/solder"
                      },
     "temperature":  400
