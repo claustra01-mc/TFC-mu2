@@ -1,0 +1,40 @@
+{
+    "neoforge:conditions":  [
+                                {
+                                    "type":  "neoforge:mod_loaded",
+                                    "modid":  "tfcmu2_disable_vanilla_netherite_ingot"
+                                }
+                            ],
+    "type":  "minecraft:crafting_shapeless",
+    "ingredients":  [
+                        {
+                            "item":  "minecraft:netherite_scrap"
+                        },
+                        {
+                            "item":  "minecraft:netherite_scrap"
+                        },
+                        {
+                            "item":  "minecraft:netherite_scrap"
+                        },
+                        {
+                            "item":  "minecraft:netherite_scrap"
+                        },
+                        {
+                            "tag":  "c:ingots/gold"
+                        },
+                        {
+                            "tag":  "c:ingots/gold"
+                        },
+                        {
+                            "tag":  "c:ingots/gold"
+                        },
+                        {
+                            "tag":  "c:ingots/gold"
+                        }
+                    ],
+    "result":  {
+                   "count":  1,
+                   "id":  "minecraft:netherite_ingot"
+               }
+}
+
