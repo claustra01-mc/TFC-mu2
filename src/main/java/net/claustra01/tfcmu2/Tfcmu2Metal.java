@@ -21,7 +21,8 @@ public enum Tfcmu2Metal implements RegistryMetal {
     TITANIUM("titanium", Rarity.UNCOMMON, 0x898B93),
     TUNGSTEN("tungsten", Rarity.EPIC, 0x585F6B),
     SOLDER("solder", Rarity.UNCOMMON, 0x888888),
-    TUNGSTEN_STEEL("tungsten_steel", Rarity.EPIC, 0x2F353E);
+    TUNGSTEN_STEEL("tungsten_steel", Rarity.EPIC, 0x2F353E),
+    NETHERITE("netherite", Rarity.EPIC, 0x3B3230);
 
     private final String serializedName;
     private final Rarity rarity;

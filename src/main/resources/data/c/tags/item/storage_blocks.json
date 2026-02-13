@@ -10,6 +10,7 @@
                    "#c:storage_blocks/tungsten",
                    "#c:storage_blocks/solder",
                    "#c:storage_blocks/tungsten_steel",
+                   "#c:storage_blocks/netherite",
                    "#c:storage_blocks/titanium"
                ]
 }

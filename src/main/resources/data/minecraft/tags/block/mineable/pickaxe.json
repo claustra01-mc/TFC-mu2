@@ -10,6 +10,7 @@
                    "tfcmu2:metal/block/tungsten",
                    "tfcmu2:metal/block/solder",
                    "tfcmu2:metal/block/tungsten_steel",
+                   "tfcmu2:metal/block/netherite",
                    "tfcmu2:ore/poor_native_osmium/granite",
                    "tfcmu2:ore/poor_native_osmium/diorite",
                    "tfcmu2:ore/poor_native_osmium/gabbro",

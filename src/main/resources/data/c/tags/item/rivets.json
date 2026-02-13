@@ -11,6 +11,7 @@
                    "#c:rivets/tungsten",
                    "#c:rivets/solder",
                    "#c:rivets/tungsten_steel",
+                   "#c:rivets/netherite",
                    "#c:rivets/titanium"
                ]
 }

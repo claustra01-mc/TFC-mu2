@@ -10,6 +10,7 @@
                    "#c:sheets/tungsten",
                    "#c:sheets/solder",
                    "#c:sheets/tungsten_steel",
+                   "#c:sheets/netherite",
                    "#c:sheets/titanium"
                ]
 }

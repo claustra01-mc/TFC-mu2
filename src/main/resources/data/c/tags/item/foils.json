@@ -11,6 +11,7 @@
                    "#c:foils/tungsten",
                    "#c:foils/solder",
                    "#c:foils/tungsten_steel",
+                   "#c:foils/netherite",
                    "#c:foils/titanium"
                ]
 }

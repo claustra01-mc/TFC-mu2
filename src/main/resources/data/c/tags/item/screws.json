@@ -11,6 +11,7 @@
                    "#c:screws/tungsten",
                    "#c:screws/solder",
                    "#c:screws/tungsten_steel",
+                   "#c:screws/netherite",
                    "#c:screws/titanium"
                ]
 }
