@@ -1,0 +1,12 @@
+{
+  "values": [
+    "tfcmu2:ore/rich_uraninite/netherrack",
+    "tfcmu2:ore/rich_uraninite/endstone"
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tfc_ie_addon"
+    }
+  ]
+}

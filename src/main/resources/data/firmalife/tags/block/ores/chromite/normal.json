@@ -1,0 +1,12 @@
+{
+  "values": [
+    "tfcmu2:ore/normal_chromite/netherrack",
+    "tfcmu2:ore/normal_chromite/endstone"
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "firmalife"
+    }
+  ]
+}

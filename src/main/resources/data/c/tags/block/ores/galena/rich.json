@@ -1,0 +1,12 @@
+{
+  "values": [
+    "tfcmu2:ore/rich_galena/netherrack",
+    "tfcmu2:ore/rich_galena/endstone"
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tfc_ie_addon"
+    }
+  ]
+}

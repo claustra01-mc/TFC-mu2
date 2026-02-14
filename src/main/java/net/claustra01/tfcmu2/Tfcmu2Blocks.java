@@ -2,7 +2,9 @@ package net.claustra01.tfcmu2;
 
 import java.util.Collections;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.List;
 import java.util.Map;
 
 import net.dries007.tfc.common.blocks.GroundcoverBlock;
@@ -26,6 +28,7 @@ public final class Tfcmu2Blocks {
     public static final Map<Rock, Map<Tfcmu2Ore, DeferredBlock<Block>>> ORES = registerOres();
     public static final Map<Rock, Map<Tfcmu2Ore, Map<Ore.Grade, DeferredBlock<Block>>>> GRADED_ORES = registerGradedOres();
     public static final Map<Tfcmu2VanillaStone, Map<Tfcmu2Ore, Map<Ore.Grade, DeferredBlock<Block>>>> VANILLA_GRADED_ORES = registerVanillaGradedOres();
+    public static final Map<Tfcmu2VanillaStone, Map<String, DeferredBlock<Block>>> COMPAT_VANILLA_ORES = registerCompatVanillaOres();
     public static final Map<Tfcmu2Ore, DeferredBlock<Block>> SMALL_ORES = registerSmallOres();
 
     private Tfcmu2Blocks() {
@@ -110,6 +113,20 @@ public final class Tfcmu2Blocks {
                     gradeItems.put(grade, items.registerSimpleBlockItem(id, VANILLA_GRADED_ORES.get(stone).get(ore).get(grade)));
                 }
                 stoneItems.put(ore, Collections.unmodifiableMap(gradeItems));
+            }
+            blockItems.put(stone, Collections.unmodifiableMap(stoneItems));
+        }
+        return Collections.unmodifiableMap(blockItems);
+    }
+
+    public static Map<Tfcmu2VanillaStone, Map<String, DeferredItem<?>>> registerCompatVanillaOreBlockItems(DeferredRegister.Items items) {
+        final EnumMap<Tfcmu2VanillaStone, Map<String, DeferredItem<?>>> blockItems = new EnumMap<>(Tfcmu2VanillaStone.class);
+        for (Tfcmu2VanillaStone stone : Tfcmu2VanillaStone.values()) {
+            final Map<String, DeferredItem<?>> stoneItems = new HashMap<>();
+            for (Map.Entry<String, DeferredBlock<Block>> entry : COMPAT_VANILLA_ORES.get(stone).entrySet()) {
+                final String oreName = entry.getKey();
+                final String id = "ore/" + oreName + "/" + stone.getSerializedName();
+                stoneItems.put(oreName, items.registerSimpleBlockItem(id, entry.getValue()));
             }
             blockItems.put(stone, Collections.unmodifiableMap(stoneItems));
         }
@@ -207,6 +224,20 @@ public final class Tfcmu2Blocks {
                     grades.put(grade, BLOCKS.register(id, () -> createVanillaOreBlock(stone.baseBlock())));
                 }
                 ores.put(ore, Collections.unmodifiableMap(grades));
+            }
+            stones.put(stone, Collections.unmodifiableMap(ores));
+        }
+        return Collections.unmodifiableMap(stones);
+    }
+
+    private static Map<Tfcmu2VanillaStone, Map<String, DeferredBlock<Block>>> registerCompatVanillaOres() {
+        final EnumMap<Tfcmu2VanillaStone, Map<String, DeferredBlock<Block>>> stones = new EnumMap<>(Tfcmu2VanillaStone.class);
+        final List<String> oreNames = Tfcmu2CompatOres.getLoadedOreNames();
+        for (Tfcmu2VanillaStone stone : Tfcmu2VanillaStone.values()) {
+            final Map<String, DeferredBlock<Block>> ores = new HashMap<>();
+            for (String oreName : oreNames) {
+                final String id = "ore/" + oreName + "/" + stone.getSerializedName();
+                ores.put(oreName, BLOCKS.register(id, () -> createVanillaOreBlock(stone.baseBlock())));
             }
             stones.put(stone, Collections.unmodifiableMap(ores));
         }
