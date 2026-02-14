@@ -1,0 +1,52 @@
+veins:
+
+  - tfc:vein/surface_bismuthinite:
+      block: tfc:ore/{tier}_bismuthinite/{rock}
+      type: tfc:cluster_vein
+      ymax: 130
+      ymin: 40
+      rarity: 32
+      density: 0.3
+      size: 20
+      rocks:
+        - chalk
+        - chert
+        - claystone
+        - conglomerate
+        - dolomite
+        - limestone
+        - shale
+        - tuff
+      tier:
+        - poor: 70
+        - normal: 25
+        - rich: 5
+      indicator:
+        block: tfc:ore/small_bismuthinite
+        rarity: 14
+        depth: 35
+        underground_rarity: 1
+        underground_count: 0
+
+  - tfc:vein/normal_bismuthinite:
+      block: tfc:ore/{tier}_bismuthinite/{rock}
+      type: tfc:cluster_vein
+      ymax: 20
+      ymin: -80
+      rarity: 45
+      density: 0.6
+      size: 40
+      rocks:
+        - diorite
+        - gabbro
+        - granite
+      tier:
+        - poor: 15
+        - normal: 25
+        - rich: 60
+      indicator:
+        block: tfc:ore/small_bismuthinite
+        rarity: 0
+        depth: 35
+        underground_rarity: 1
+        underground_count: 4
