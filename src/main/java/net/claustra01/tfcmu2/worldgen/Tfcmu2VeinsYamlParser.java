@@ -357,7 +357,8 @@ public final class Tfcmu2VeinsYamlParser {
             final int maxY = getInt(props, id, "ymax", "max_y");
             final int rarity = requireInt(props, "rarity", id);
             final float density = requireFloat(props, "density", id);
-            final int size = requireInt(props, "size", id);
+            final boolean isPipe = "tfc:pipe_vein".equals(type.toString());
+            final int size = isPipe ? (props.containsKey("size") ? requireInt(props, "size", id) : 0) : requireInt(props, "size", id);
 
             @SuppressWarnings("unchecked")
             final List<String> rocks = (List<String>) props.getOrDefault("rocks", List.of());
