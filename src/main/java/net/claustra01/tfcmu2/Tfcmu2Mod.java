@@ -1,5 +1,6 @@
 package net.claustra01.tfcmu2;
 
+import net.claustra01.tfcmu2.worldgen.Tfcmu2Worldgen;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.Mod;
@@ -17,6 +18,7 @@ public final class Tfcmu2Mod {
         if (FMLEnvironment.dist == Dist.CLIENT) {
             Tfcmu2ClientEvents.register(modEventBus);
         }
+        Tfcmu2Worldgen.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
         Tfcmu2Fluids.FLUID_TYPES.register(modEventBus);
         Tfcmu2Fluids.FLUIDS.register(modEventBus);
         Tfcmu2Blocks.BLOCKS.register(modEventBus);
