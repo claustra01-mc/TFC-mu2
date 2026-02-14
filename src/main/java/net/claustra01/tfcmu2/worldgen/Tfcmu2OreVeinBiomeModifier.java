@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.mojang.logging.LogUtils;
 
@@ -36,6 +37,7 @@ public final class Tfcmu2OreVeinBiomeModifier implements BiomeModifier {
     static final Tfcmu2OreVeinBiomeModifier INSTANCE = new Tfcmu2OreVeinBiomeModifier();
 
     private static final Logger LOGGER = LogUtils.getLogger();
+    private static final AtomicBoolean LOGGED_CUSTOM_STATUS = new AtomicBoolean(false);
 
     // Matches the tags referenced by TFC biome JSONs.
     private static final TagKey<PlacedFeature> VEINS_TAG = TagKey.create(
@@ -74,9 +76,15 @@ public final class Tfcmu2OreVeinBiomeModifier implements BiomeModifier {
         if (Tfcmu2Config.COMMON.enableCustomVeinGeneration.get()) {
             final List<Holder<PlacedFeature>> customVeins = Tfcmu2CustomVeins.resolvePlacedFeatures(placedFeatures);
             if (!customVeins.isEmpty()) {
+                if (LOGGED_CUSTOM_STATUS.compareAndSet(false, true)) {
+                    LOGGER.info("Custom vein generation enabled: replacing ore veins from #tfc:in_biome/veins with {} custom veins.", customVeins.size());
+                }
                 // Only replace actual ore veins. Keep other features from the veins tag (ex: gravel, dikes, geodes) intact.
                 replaceOreVeinsFromTagWithValues(ores, placedFeatures, VEINS_TAG, "#tfc:in_biome/veins", customVeins);
             } else {
+                if (LOGGED_CUSTOM_STATUS.compareAndSet(false, true)) {
+                    LOGGER.warn("Custom vein generation is enabled, but no custom veins were loaded. Falling back to default TFC veins.");
+                }
                 // If enabled but no custom veins are available, keep default behavior instead of wiping veins.
                 replaceFromTag(ores, placedFeatures, VEINS_TAG, "#tfc:in_biome/veins");
             }

@@ -9,27 +9,20 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import com.mojang.logging.LogUtils;
 
 import net.claustra01.tfcmu2.Tfcmu2Mod;
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.neoforge.registries.DeferredHolder;
 
 import org.slf4j.Logger;
 
 /**
- * Loads veins from config/tfcmu2/veins.yaml and registers matching configured/placed features under the tfcmu2 namespace.
+ * Loads veins from config/tfcmu2/veins.yaml and builds direct placed features from them.
  * These features are inserted into biomes by {@link Tfcmu2OreVeinBiomeModifier} when enabled via config.
  */
 public final class Tfcmu2CustomVeins {
@@ -39,9 +32,9 @@ public final class Tfcmu2CustomVeins {
     private static final String DEFAULT_CONFIG_FILE = "veins.yaml";
     private static final String CLASSPATH_SAMPLE = "/tfcmu2/veins.yaml";
 
-    private static final List<ResourceLocation> CUSTOM_PLACED_FEATURE_IDS = new ArrayList<>();
-    private static Registry<PlacedFeature> CACHED_REGISTRY;
-    private static List<Holder<PlacedFeature>> CACHED_HOLDERS = List.of();
+    private static List<Tfcmu2VeinsYamlParser.VeinDefinition> CACHED_DEFS = List.of();
+    private static List<net.minecraft.core.Holder<PlacedFeature>> CACHED_PLACED_FEATURES = List.of();
+    private static boolean BUILT_PLACED_FEATURES = false;
 
     private Tfcmu2CustomVeins() {
     }
@@ -64,7 +57,7 @@ public final class Tfcmu2CustomVeins {
         }
 
         final Set<ResourceLocation> seen = new HashSet<>();
-        int registered = 0;
+        final List<Tfcmu2VeinsYamlParser.VeinDefinition> accepted = new ArrayList<>(defs.size());
         for (Tfcmu2VeinsYamlParser.VeinDefinition def : defs) {
             final ResourceLocation outId = toTfcmu2Id(def.id());
             if (!seen.add(outId)) {
@@ -78,42 +71,44 @@ public final class Tfcmu2CustomVeins {
                 continue;
             }
 
-            final DeferredHolder<ConfiguredFeature<?, ?>, ConfiguredFeature<?, ?>> configured = Tfcmu2Worldgen.CONFIGURED_FEATURES.register(outId.getPath(), def::buildConfiguredFeature);
-            Tfcmu2Worldgen.PLACED_FEATURES.register(outId.getPath(), () -> new PlacedFeature(configured, List.of()));
-
-            CUSTOM_PLACED_FEATURE_IDS.add(outId);
-            registered++;
+            accepted.add(def);
         }
 
-        if (registered == 0) {
+        if (accepted.isEmpty()) {
             LOGGER.warn("No custom veins were registered from {}.", yamlPath);
         } else {
-            LOGGER.info("Registered {} custom veins from {} (namespace {}).", registered, yamlPath, Tfcmu2Mod.MOD_ID);
+            // Note: placed/configured features are datapack registries in 1.21.1 and are not part of the mod-registerable builtin registries.
+            // We therefore build & inject direct placed features at runtime (see resolvePlacedFeatures).
+            LOGGER.info("Loaded {} custom veins from {} (namespace {}).", accepted.size(), yamlPath, Tfcmu2Mod.MOD_ID);
         }
+        CACHED_DEFS = List.copyOf(accepted);
+        CACHED_PLACED_FEATURES = List.of();
+        BUILT_PLACED_FEATURES = false;
     }
 
-    public static List<Holder<PlacedFeature>> resolvePlacedFeatures(Registry<PlacedFeature> placedFeatures) {
-        if (CUSTOM_PLACED_FEATURE_IDS.isEmpty()) {
+    public static List<net.minecraft.core.Holder<PlacedFeature>> resolvePlacedFeatures(net.minecraft.core.Registry<PlacedFeature> placedFeatures) {
+        if (CACHED_DEFS.isEmpty()) {
             return List.of();
         }
-        if (placedFeatures == CACHED_REGISTRY) {
-            return CACHED_HOLDERS;
+        if (BUILT_PLACED_FEATURES) {
+            return CACHED_PLACED_FEATURES;
         }
 
-        final List<Holder<PlacedFeature>> resolved = new ArrayList<>(CUSTOM_PLACED_FEATURE_IDS.size());
-        for (ResourceLocation id : CUSTOM_PLACED_FEATURE_IDS) {
-            final ResourceKey<PlacedFeature> key = ResourceKey.create(Registries.PLACED_FEATURE, id);
-            final Optional<Holder.Reference<PlacedFeature>> holder = placedFeatures.getHolder(key);
-            if (holder.isPresent()) {
-                resolved.add(holder.get());
-            } else {
-                LOGGER.warn("Custom placed feature {} is not present in the placed_feature registry.", id);
+        // Build direct placed features lazily, after all builtin registries (including other mods' Feature/Block entries) are available.
+        final List<net.minecraft.core.Holder<PlacedFeature>> built = new ArrayList<>(CACHED_DEFS.size());
+        for (Tfcmu2VeinsYamlParser.VeinDefinition def : CACHED_DEFS) {
+            try {
+                final var configured = def.buildConfiguredFeature();
+                final var placed = new PlacedFeature(net.minecraft.core.Holder.direct(configured), List.of());
+                built.add(net.minecraft.core.Holder.direct(placed));
+            } catch (Exception e) {
+                LOGGER.error("Failed to build custom vein {}. Skipping.", def.id(), e);
             }
         }
 
-        CACHED_REGISTRY = placedFeatures;
-        CACHED_HOLDERS = List.copyOf(resolved);
-        return CACHED_HOLDERS;
+        CACHED_PLACED_FEATURES = List.copyOf(built);
+        BUILT_PLACED_FEATURES = true;
+        return CACHED_PLACED_FEATURES;
     }
 
     private static boolean canLoadDefinition(Tfcmu2VeinsYamlParser.VeinDefinition def) {

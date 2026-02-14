@@ -24,8 +24,6 @@ public final class Tfcmu2Mod {
             Tfcmu2ClientEvents.register(modEventBus);
         }
         Tfcmu2Worldgen.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
-        Tfcmu2Worldgen.CONFIGURED_FEATURES.register(modEventBus);
-        Tfcmu2Worldgen.PLACED_FEATURES.register(modEventBus);
         Tfcmu2Fluids.FLUID_TYPES.register(modEventBus);
         Tfcmu2Fluids.FLUIDS.register(modEventBus);
         Tfcmu2Blocks.BLOCKS.register(modEventBus);
