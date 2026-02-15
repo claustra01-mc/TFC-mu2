@@ -1,2 +1,2 @@
-# TFC Metallum Unofficial (1.21.1+)
+# TFC Metallum Overhaul
 https://www.curseforge.com/minecraft/mc-mods/tfc-metallum-overhaul
