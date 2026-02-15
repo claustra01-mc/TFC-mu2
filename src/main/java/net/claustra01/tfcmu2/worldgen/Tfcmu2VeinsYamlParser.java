@@ -122,27 +122,27 @@ public final class Tfcmu2VeinsYamlParser {
 
                 final Weighted<BlockState> weighted = new Weighted<>(new ArrayList<>());
                 final String rockToken = resolveOreRockToken(rock);
-                for (Map.Entry<String, Integer> entry : tierWeights.entrySet()) {
-                    final String tier = entry.getKey();
-                    final int weight = entry.getValue();
-                    if (weight <= 0) {
-                        continue;
+                if (tierWeights.isEmpty()) {
+                    final String out = blockTemplate.replace("{rock}", rockToken);
+                    final BlockState oreState = resolveOutputBlockState(out);
+                    if (oreState != null) {
+                        weighted.add(1, oreState);
                     }
-                    final String out = blockTemplate
-                        .replace("{tier}", tier)
-                        .replace("{rock}", rockToken);
-                    final ResourceLocation outId = ResourceLocation.tryParse(out);
-                    if (outId == null) {
-                        LOGGER.warn("Invalid ore block id '{}' (template '{}') in {}", out, blockTemplate, id);
-                        continue;
+                } else {
+                    for (Map.Entry<String, Integer> entry : tierWeights.entrySet()) {
+                        final String tier = entry.getKey();
+                        final int weight = entry.getValue();
+                        if (weight <= 0) {
+                            continue;
+                        }
+                        final String out = blockTemplate
+                            .replace("{tier}", tier)
+                            .replace("{rock}", rockToken);
+                        final BlockState oreState = resolveOutputBlockState(out);
+                        if (oreState != null) {
+                            weighted.add(weight, oreState);
+                        }
                     }
-
-                    final Block oreBlock = BuiltInRegistries.BLOCK.get(outId);
-                    if (oreBlock == Blocks.AIR && !BuiltInRegistries.BLOCK.containsKey(outId)) {
-                        LOGGER.warn("Missing ore block {} referenced by {} (did you install the correct mods?)", outId, id);
-                        continue;
-                    }
-                    weighted.add(weight, oreBlock.defaultBlockState());
                 }
 
                 if (!weighted.isEmpty()) {
@@ -156,6 +156,21 @@ public final class Tfcmu2VeinsYamlParser {
             final long seed = seedOverride != null ? seedOverride : hashSeed(randomName);
 
             return new VeinConfig(states, indicatorOpt, rarity, density, minY, maxY, project, projectOffset, seed, nearLava);
+        }
+
+        private BlockState resolveOutputBlockState(String out) {
+            final ResourceLocation outId = ResourceLocation.tryParse(out);
+            if (outId == null) {
+                LOGGER.warn("Invalid ore block id '{}' (template '{}') in {}", out, blockTemplate, id);
+                return null;
+            }
+
+            final Block oreBlock = BuiltInRegistries.BLOCK.get(outId);
+            if (oreBlock == Blocks.AIR && !BuiltInRegistries.BLOCK.containsKey(outId)) {
+                LOGGER.warn("Missing ore block {} referenced by {} (did you install the correct mods?)", outId, id);
+                return null;
+            }
+            return oreBlock.defaultBlockState();
         }
 
         private Indicator buildIndicator() {
@@ -376,7 +391,7 @@ public final class Tfcmu2VeinsYamlParser {
 
             @SuppressWarnings("unchecked")
             final LinkedHashMap<String, Integer> tiers = (LinkedHashMap<String, Integer>) props.getOrDefault("tier", new LinkedHashMap<>());
-            if (tiers.isEmpty()) {
+            if (tiers.isEmpty() && block.contains("{tier}")) {
                 LOGGER.warn("Missing tier weights for {} in {}", id, owner);
                 return null;
             }

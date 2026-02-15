@@ -503,8 +503,6 @@ veins:
         - granite
         - diorite
         - gabbro
-      tier:
-        - normal: 1
 
   - tfc:vein/graphite:
       block: tfc:ore/graphite/{rock}
@@ -520,8 +518,6 @@ veins:
         - marble
         - quartzite
         - schist
-      tier:
-        - normal: 1
 
   - tfc:vein/lignite:
       block: tfc:lignite
@@ -544,8 +540,6 @@ veins:
         - chert
         - chalk
         - tuff
-      tier:
-        - normal: 1
 
   - tfc:vein/bituminous_coal:
       block: tfc:bituminous_coal
@@ -568,8 +562,6 @@ veins:
         - chert
         - chalk
         - tuff
-      tier:
-        - normal: 1
 
   - tfc:vein/sulfur:
       block: tfc:ore/sulfur/{rock}
@@ -592,8 +584,6 @@ veins:
         - schist
         - gneiss
         - marble
-      tier:
-        - normal: 1
 
   - tfc:vein/tuff_sulfur:
       block: tfc:ore/sulfur/{rock}
@@ -607,8 +597,6 @@ veins:
       random_name: tuff_sulfur
       rocks:
         - tuff
-      tier:
-        - normal: 1
 
   - tfc:vein/cryolite:
       block: tfc:ore/cryolite/{rock}
@@ -622,8 +610,6 @@ veins:
       rocks:
         - granite
         - diorite
-      tier:
-        - normal: 1
 
   - tfc:vein/cinnabar:
       block: tfc:ore/cinnabar/{rock}
@@ -639,8 +625,6 @@ veins:
         - phyllite
         - gneiss
         - schist
-      tier:
-        - normal: 1
 
   - tfc:vein/saltpeter:
       block: tfc:ore/saltpeter/{rock}
@@ -661,8 +645,6 @@ veins:
         - chert
         - chalk
         - tuff
-      tier:
-        - normal: 1
 
   - tfc:vein/sylvite:
       block: tfc:ore/sylvite/{rock}
@@ -678,8 +660,6 @@ veins:
         - shale
         - claystone
         - chert
-      tier:
-        - normal: 1
 
   - tfc:vein/borax:
       block: tfc:ore/borax/{rock}
@@ -695,8 +675,6 @@ veins:
         - claystone
         - limestone
         - shale
-      tier:
-        - normal: 1
 
   - tfc:vein/gypsum:
       block: tfc:ore/gypsum/{rock}
@@ -717,8 +695,6 @@ veins:
         - chert
         - chalk
         - tuff
-      tier:
-        - normal: 1
 
   - tfc:vein/halite:
       block: tfc:halite
@@ -741,8 +717,6 @@ veins:
         - chert
         - chalk
         - tuff
-      tier:
-        - normal: 1
 
   # TFC (gems)
   - tfc:vein/lapis_lazuli:
@@ -757,8 +731,6 @@ veins:
       rocks:
         - limestone
         - marble
-      tier:
-        - normal: 1
 
   - tfc:vein/diamond:
       block: tfc:ore/diamond/{rock}
@@ -777,8 +749,6 @@ veins:
       random_name: diamond
       rocks:
         - gabbro
-      tier:
-        - normal: 1
 
   - tfc:vein/emerald:
       block: tfc:ore/emerald/{rock}
@@ -799,8 +769,6 @@ veins:
         - granite
         - diorite
         - gabbro
-      tier:
-        - normal: 1
 
   - tfc:vein/ruby:
       block: tfc:ore/ruby/{rock}
@@ -814,8 +782,6 @@ veins:
       rocks:
         - schist
         - gneiss
-      tier:
-        - normal: 1
 
   - tfc:vein/amethyst:
       block: tfc:ore/amethyst/{rock}
@@ -842,8 +808,6 @@ veins:
         - schist
         - gneiss
         - marble
-      tier:
-        - normal: 1
 
   - tfc:vein/opal:
       block: tfc:ore/opal/{rock}
@@ -868,8 +832,6 @@ veins:
         - basalt
         - andesite
         - dacite
-      tier:
-        - normal: 1
 
   # Firmalife
   - firmalife:vein/normal_chromite:
