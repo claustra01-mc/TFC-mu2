@@ -159,7 +159,120 @@ ID規則:
 - 追加金属形状（`foil`, `wire` など）: `tfc_items` ロード時のみ
 - 鉱石洗浄形状: `tfcorewashing` ロード時のみ
 
-## 7. 参照コード
+## 7. レシピ実装type
+
+主要ディレクトリ:
+- `src/main/resources/data/tfcmu2/recipe`
+- `src/main/resources/data/minecraft/recipe`（`netherite_ingot.json` の条件付き上書き）
+
+レシピカテゴリtype:
+- `alloy`
+- `anvil`
+- `casting`
+- `crafting`
+- `heating`
+- `ore_washing`
+- `tfc`
+- `welding`
+
+金属形状のレシピtype:
+- `casting/ingot`
+- `anvil/metal/sheet`
+- `anvil/metal/rod`
+- `welding/metal/double_ingot`
+- `welding/metal/double_sheet`
+- `crafting/metal/block`（`block`, `block_slab`, `block_stairs`）
+- `heating/metal/ingot`
+- `heating/metal/double_ingot`
+- `heating/metal/sheet`
+- `heating/metal/double_sheet`
+- `heating/metal/rod`
+- `heating/metal/block`
+
+追加金属形状のレシピtype（`tfc_items` 条件付き）:
+- `anvil/more_items/foil`
+- `anvil/more_items/gear`
+- `anvil/more_items/nail`
+- `anvil/more_items/ring`
+- `anvil/more_items/rivet`
+- `anvil/more_items/screw`
+- `anvil/more_items/stamen`
+- `anvil/more_items/wire`
+- `welding/more_items/heavy_sheet`
+- `heating/more_items/foil`
+- `heating/more_items/gear`
+- `heating/more_items/heavy_sheet`
+- `heating/more_items/nail`
+- `heating/more_items/ring`
+- `heating/more_items/rivet`
+- `heating/more_items/screw`
+- `heating/more_items/stamen`
+- `heating/more_items/wire`
+
+鉱石関連レシピtype:
+- `heating/ore`（`poor`, `normal`, `rich`, `small`）
+- `ore_washing/ores/*`（hammer系）
+- `ore_washing/chunks/quern`
+- `ore_washing/chunks/milling`
+- `ore_washing/chunks/crusher`
+- `ore_washing/rocky_chunks/splashing`（`create` 併用条件あり）
+- `ore_washing/dirt_dusts/splashing`（`create` 併用条件あり）
+- `crafting/ore_washing/pellet`
+- `crafting/ore_washing/briquet`
+- `crafting/ore_washing/dirty_dust`
+- `crafting/ore_washing/uncompress_pellet`
+- `crafting/ore_washing/uncompress_briquet`
+- `crafting/ore_washing/uncompress_dust`
+- `tfc/heating/ore_washing/pellet`
+- `tfc/heating/ore_washing/briquet`
+- `tfc/heating/ore_washing/powder`
+
+compat鉱石（`tfc` / `firmalife` / `tfc_ie_addon`）:
+- このMod側では専用加工レシピtypeは持たず、主に鉱石ブロック展開が役割。
+
+## 8. モデル実装type
+
+主要ディレクトリ:
+- `src/main/resources/assets/tfcmu2/models/block`
+- `src/main/resources/assets/tfcmu2/models/item`
+
+金属モデルtype:
+- `models/item/metal/ingot`
+- `models/item/metal/double_ingot`
+- `models/item/metal/sheet`
+- `models/item/metal/double_sheet`
+- `models/item/metal/rod`
+- `models/item/metal/foil`
+- `models/item/metal/gear`
+- `models/item/metal/heavy_sheet`
+- `models/item/metal/nail`
+- `models/item/metal/ring`
+- `models/item/metal/rivet`
+- `models/item/metal/screw`
+- `models/item/metal/stamen`
+- `models/item/metal/wire`
+- `models/item/metal/pellet`
+- `models/item/metal/briquet`
+- `models/item/metal/chunks`
+- `models/item/metal/rocky_chunks`
+- `models/item/metal/dirty_dust`
+- `models/item/metal/dirty_pile`
+- `models/item/metal/powder`
+- `models/item/metal/block`
+- `models/block/metal/block`（`block`, `slab`, `stairs`）
+
+鉱石モデルtype:
+- `models/item/ore/<ore_or_grade>`
+- `models/item/ore/<ore_or_grade>/<rock_or_stone>`
+- `models/block/ore/small_*`
+- `models/block/ore/<ore_or_grade>/<rock_or_stone>`
+
+鉱石モデルの補足:
+- compat鉱石は主に `netherrack` / `endstone` 向けtypeを持つ。
+- 独自鉱石は TFC岩石 + バニラ石材向けtypeを持つ。
+- 一部 `small_*` は groundcover blockのみ（ブロックアイテムなし）。
+
+## 9. 参照コード
 
 - `src/main/java/net/claustra01/tfcmu2/Tfcmu2Metal.java`
 - `src/main/java/net/claustra01/tfcmu2/Tfcmu2Ore.java`
