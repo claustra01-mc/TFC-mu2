@@ -292,3 +292,17 @@ compat鉱石（`tfc` / `firmalife` / `tfc_ie_addon`）:
 - `src/main/java/net/claustra01/tfcmu2/Tfcmu2Blocks.java`
 - `src/main/java/net/claustra01/tfcmu2/Tfcmu2CompatOres.java`
 - `src/main/java/net/claustra01/tfcmu2/Tfcmu2Mod.java`
+
+## 11. TFC item_heat implementation
+
+Directory:
+- `src/main/resources/data/tfcmu2/tfc/item_heat`
+
+Coverage:
+- Metal heat definitions include `block`, `block_slab`, and `block_stairs` separately.
+- Graded own ores (`small`, `poor`, `normal`, `rich`) each share one `item_heat/<ore>.json`.
+- `tfcorewashing` heating inputs are covered by `item_heat/pellet_briquet/<ore>.json` and `item_heat/powder/<ore>.json`.
+
+Notes:
+- `block_slab` and `block_stairs` use direct item IDs, not `c:storage_blocks/*` tags.
+- Ore heat values follow the source metal heat values; powder heat uses the source metal heat tier.
