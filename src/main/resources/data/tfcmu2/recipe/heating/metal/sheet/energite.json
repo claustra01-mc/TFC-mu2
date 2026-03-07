@@ -1,0 +1,11 @@
+{
+    "type":  "tfc:heating",
+    "ingredient":  {
+                       "tag":  "c:sheets/energite"
+                   },
+    "result_fluid":  {
+                         "amount":  200,
+                         "id":  "tfc:metal/energite"
+                     },
+    "temperature":  630
+}

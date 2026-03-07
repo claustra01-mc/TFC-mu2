@@ -1,0 +1,8 @@
+{
+    "ingredient":  {
+                       "tag":  "c:rings/biosteel"
+                   },
+    "heat_capacity":  2,
+    "forging_temperature":  378,
+    "welding_temperature":  504
+}

@@ -1,0 +1,8 @@
+{
+    "parent":  "block/slab",
+    "textures":  {
+                     "bottom":  "tfcmu2:block/metal/block/biosteel",
+                     "top":  "tfcmu2:block/metal/block/biosteel",
+                     "side":  "tfcmu2:block/metal/block/biosteel"
+                 }
+}

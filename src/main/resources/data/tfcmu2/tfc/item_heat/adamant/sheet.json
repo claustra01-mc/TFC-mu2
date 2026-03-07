@@ -1,0 +1,8 @@
+{
+    "ingredient":  {
+                       "tag":  "c:sheets/adamant"
+                   },
+    "heat_capacity":  8,
+    "forging_temperature":  378,
+    "welding_temperature":  504
+}

@@ -751,6 +751,18 @@
                    "tfcmu2:ore/fluorite/shale",
                    "tfcmu2:ore/fluorite/slate",
                    "tfcmu2:ore/fluorite/tuff",
-                   "tfcmu2:ore/small_fluorite"
+                   "tfcmu2:ore/small_fluorite",
+                   "tfcmu2:metal/block/adamant",
+                   "tfcmu2:metal/block/adamant_slab",
+                   "tfcmu2:metal/block/adamant_stairs",
+                   "tfcmu2:metal/block/biosteel",
+                   "tfcmu2:metal/block/biosteel_slab",
+                   "tfcmu2:metal/block/biosteel_stairs",
+                   "tfcmu2:metal/block/duratium",
+                   "tfcmu2:metal/block/duratium_slab",
+                   "tfcmu2:metal/block/duratium_stairs",
+                   "tfcmu2:metal/block/energite",
+                   "tfcmu2:metal/block/energite_slab",
+                   "tfcmu2:metal/block/energite_stairs"
                ]
 }

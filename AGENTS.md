@@ -6,13 +6,14 @@
 
 - 仕様追加や実装変更があった場合、この `AGENTS.md` を随時更新する。
 - 形状の追加・削除、条件付き有効化の変更、ID規則の変更を優先して反映する。
+- 依存元Modの取得・展開・一時解析（jar展開や素材抽出など）は、リポジトリ直下の `.tmp` で行う。
 
 ## 1. 独自金属
 
 ### 1.1 金属アイテム形状
 
 対象金属:
-`compressed_iron`, `platinum`, `naquadah`, `iridium`, `osmium`, `osmiridium`, `mythril`, `refined_glowstone`, `refined_obsidian`, `antimony`, `titanium`, `tungsten`, `solder`, `tungsten_steel`, `netherite`
+`compressed_iron`, `platinum`, `naquadah`, `iridium`, `osmium`, `osmiridium`, `mythril`, `adamant`, `biosteel`, `duratium`, `energite`, `refined_glowstone`, `refined_obsidian`, `antimony`, `titanium`, `tungsten`, `solder`, `tungsten_steel`, `netherite`
 
 常時生成される形状:
 - `ingot`
@@ -272,7 +273,18 @@ compat鉱石（`tfc` / `firmalife` / `tfc_ie_addon`）:
 - 独自鉱石は TFC岩石 + バニラ石材向けtypeを持つ。
 - 一部 `small_*` は groundcover blockのみ（ブロックアイテムなし）。
 
-## 9. 参照コード
+## 9. テクスチャ生成方法
+
+対象:
+- 新規金属の `block` / `ingot` / `double_ingot` / `sheet` / `double_sheet` / `rod`
+- `tfc_items` 由来追加形状（`foil`, `gear`, `heavy_sheet`, `nail`, `ring`, `rivet`, `screw`, `stamen`, `wire`）
+
+手順:
+1. `.tmp` で依存jarを展開し、TFC / TFC More Items の `wrought_iron` テクスチャをベースとして取得する。
+2. `.tmp` で 元Mod(ユーザーから指示がある) の該当 `ingot.png` を取得し、金属ごとの代表色（平均色）を抽出する。
+3. ベース画像の非透過ピクセルごとに輝度を算出し、コントラスト補正後に代表色へマッピングして生成する。
+
+## 10. 参照コード
 
 - `src/main/java/net/claustra01/tfcmu2/Tfcmu2Metal.java`
 - `src/main/java/net/claustra01/tfcmu2/Tfcmu2Ore.java`
